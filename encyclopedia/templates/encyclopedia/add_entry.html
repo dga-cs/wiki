@@ -1,0 +1,36 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Add a new entry
+{% endblock %}
+{% block body %}
+<h1 id="create_entry">Create a new encyclopedia entry</h1>
+<div class="content">
+    {% if form %}
+    <form action="{% url 'add' %}" method="post">    
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="my_row">
+            <div class="my_col">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="my_col">
+                {% for error in form.title.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ error }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>           
+        </div>
+    </form>
+    {% endif %}
+</div>      
+{% endblock %}

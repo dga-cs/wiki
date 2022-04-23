@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ entry_title }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if entry_content is not None %}
+            {{ entry_content|safe }}
+        {% else %}
+            Sorry, requested page "{{ entry_title }}" was not found!
+        {% endif %}
+    </div>
+    <a class="btn btn-primary" href="edit/{{ entry_title }}" role="button">Edit</a>
+{% endblock %}
